@@ -115,7 +115,7 @@ function Property() {
                     onChange={(e) => setLocation(e.target.value)}
                   >
                     <option value="allCities">All Cities</option>
-                    <option value="mumbai">Mumbai</option>
+                    <option value="mumbai">mumbai</option>;
                     <option value="latur">Latur</option>
                     <option value="delhi">Delhi</option>
                     <option value="pune">Pune</option>

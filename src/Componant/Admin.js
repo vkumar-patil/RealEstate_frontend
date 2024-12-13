@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 
 function Admin() {
   const [title, setTitle] = useState("");
@@ -37,7 +37,6 @@ function Admin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("title", title);
     formData.append("budget", budget);
@@ -56,7 +55,7 @@ function Admin() {
     formData.append("pincode", pincode);
     formData.append("bathroom", bathroom);
     formData.append("buildyear", buildyear);
-    Image.forEach((Image, index) => {
+    Image.forEach((Image) => {
       formData.append("Image", Image);
     });
 
@@ -74,10 +73,7 @@ function Admin() {
       console.log("Data submitted successfully:", response.data.data, response);
       alert("Data submitted successfully");
     } catch (error) {
-      console.error(
-        "Error submitting data:",
-        error.response?.data || error.message
-      );
+      console.log(error);
     }
   };
 

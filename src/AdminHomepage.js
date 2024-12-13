@@ -54,7 +54,7 @@ function AdminHomepage() {
     <>
       <AdminNavbar />
       <Link to={"/Admin"}>
-        <button style={{borderRadius:"10px"}}>Add New Property</button>
+        <button style={{ borderRadius: "10px" }}>Add New Property</button>
       </Link>
       <div className="container">
         <div className="row">
