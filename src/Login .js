@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
+
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 function Login() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function Login() {
       if (user.Admin === true) {
         navigate("/Admin");
       } else {
-        navigate("/UserHomepage");
+        navigate("/Property");
       }
     } catch (error) {
       console.log("login fail", error);
@@ -63,7 +64,7 @@ function Login() {
           Submit
         </button>
         <p>
-          {/* if you not registerd <Link to={"/register"}>Register</Link> */}
+          if you not registerd <Link to={"/Register"}>Register</Link>
         </p>
       </form>
     </div>

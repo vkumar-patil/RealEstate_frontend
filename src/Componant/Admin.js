@@ -15,6 +15,10 @@ function Admin() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
+  const [location, setLocation] = useState("");
+  const [bathroom, setBathroom] = useState("");
+  const [buildyear, setBuildYear] = useState("");
+  const [pincode, setPincode] = useState("");
   const [Image, setImages] = useState([]);
 
   const handleInputChange = (setter) => (e) => setter(e.target.value);
@@ -48,8 +52,12 @@ function Admin() {
     formData.append("city", city);
     formData.append("state", state);
     formData.append("country", country);
+    formData.append("location", location);
+    formData.append("pincode", pincode);
+    formData.append("bathroom", bathroom);
+    formData.append("buildyear", buildyear);
     Image.forEach((Image, index) => {
-      formData.append("Image", Image); // Add file
+      formData.append("Image", Image);
     });
 
     try {
@@ -63,7 +71,8 @@ function Admin() {
           },
         }
       );
-      console.log("Data submitted successfully:", response.data);
+      console.log("Data submitted successfully:", response.data.data, response);
+      alert("Data submitted successfully");
     } catch (error) {
       console.error(
         "Error submitting data:",
@@ -98,6 +107,17 @@ function Admin() {
               onChange={handleInputChange(setBudget)}
             />
           </div>
+          <div className="form-group col-md-2">
+            <label htmlFor="inputPincode">Pincode</label>
+            <input
+              type="text"
+              className="form-control"
+              id="inputPincode"
+              placeholder="Pincode"
+              value={pincode}
+              onChange={handleInputChange(setPincode)}
+            />
+          </div>
           <div className="form-group col-md-4">
             <label htmlFor="inputState">Property Status</label>
             <select
@@ -111,22 +131,6 @@ function Admin() {
               <option value="For Sale">For Sale</option>
             </select>
           </div>
-          <div className="form-group col-md-2">
-            <label htmlFor="inputBedroom">Bedroom</label>
-            <select
-              id="inputBedroom"
-              className="form-control"
-              value={bedroom}
-              onChange={handleInputChange(setBedroom)}
-            >
-              <option value="">Choose...</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          </div>
-        </div>
-        <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="inputAddress">Address</label>
             <input
@@ -152,6 +156,34 @@ function Admin() {
         </div>
         <div className="form-row">
           <div className="form-group col-md-2">
+            <label htmlFor="inputBedroom">Bedroom</label>
+            <select
+              id="inputBedroom"
+              className="form-control"
+              value={bedroom}
+              onChange={handleInputChange(setBedroom)}
+            >
+              <option value="">Choose...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <div className="form-group col-md-2">
+            <label htmlFor="inputBathroom">Bathroom</label>
+            <select
+              id="inputBathroom"
+              className="form-control"
+              value={bathroom}
+              onChange={handleInputChange(setBathroom)}
+            >
+              <option value="">Choose...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <div className="form-group col-md-2">
             <label htmlFor="inputPropertySize">Property Size</label>
             <input
               type="text"
@@ -159,6 +191,16 @@ function Admin() {
               id="inputPropertySize"
               value={propertySize}
               onChange={handleInputChange(setPropertySize)}
+            />
+          </div>
+          <div className="form-group col-md-2">
+            <label htmlFor="inputPropertySize">BuildYear</label>
+            <input
+              type="text"
+              className="form-control"
+              id="inputBuildYear"
+              value={buildyear}
+              onChange={handleInputChange(setBuildYear)}
             />
           </div>
           <div className="form-group col-md-4">
@@ -174,67 +216,80 @@ function Admin() {
               <option value="Villa">Villa</option>
             </select>
           </div>
-          <div className="form-group col-md-2">
-            <label htmlFor="inputGarage">Garage</label>
-            <select
-              id="inputGarage"
-              className="form-control"
-              value={garage}
-              onChange={handleInputChange(setGarage)}
-            >
-              <option value="">Choose...</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
-          </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="inputCity">City</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputCity"
-              value={city}
-              onChange={handleInputChange(setCity)}
-            />
-          </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="inputState">State</label>
-            <select
-              id="inputState"
-              className="form-control"
-              value={state}
-              onChange={handleInputChange(setState)}
-            >
-              <option value="">Choose...</option>
-              <option value="Maharashtra">Maharashtra</option>
-              <option value="Karnataka">Karnataka</option>
-              <option value="UP">UP</option>
-              <option value="Gujarat">Gujarat</option>
-              <option value="Delhi">Delhi</option>
-            </select>
-          </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="inputCountry">Country</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputCountry"
-              value={country}
-              onChange={handleInputChange(setCountry)}
-            />
-          </div>
-          <div className="form-group col-md-4">
-            <label htmlFor="inputImages">Images</label>
-            <input
-              type="file"
-              className="form-control"
-              id="inputImages"
-              name="Image"
-              multiple
-              onChange={handleFileChange}
-            />
+          <div className="row">
+            <div className="form-group col-md-2">
+              <label htmlFor="inputGarage">Garage</label>
+              <select
+                id="inputGarage"
+                className="form-control"
+                value={garage}
+                onChange={handleInputChange(setGarage)}
+              >
+                <option value="">Choose...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+
+            <div className="form-group col-md-2">
+              <label htmlFor="inputCity">City</label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputCity"
+                value={city}
+                onChange={handleInputChange(setCity)}
+              />
+            </div>
+            <div className="form-group col-md-4">
+              <label htmlFor="inputState">State</label>
+              <select
+                id="inputState"
+                className="form-control"
+                value={state}
+                onChange={handleInputChange(setState)}
+              >
+                <option value="">Choose...</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="UP">UP</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Delhi">Delhi</option>
+              </select>
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="inputImages">Images</label>
+              <input
+                type="file"
+                className="form-control"
+                id="inputImages"
+                name="Image"
+                multiple
+                onChange={handleFileChange}
+              />
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="inputCountry">Country</label>
+              <input
+                type="text"
+                className="form-control"
+                id="inputCountry"
+                value={country}
+                onChange={handleInputChange(setCountry)}
+              />
+            </div>
           </div>
 
+          <div className="form-group col-md-4">
+            <label htmlFor="inputCountry">location</label>
+            <input
+              type="text"
+              className="form-control"
+              id="inputlocation"
+              value={location}
+              onChange={handleInputChange(setLocation)}
+            />
+          </div>
           <div className="form-group col-md-6">
             <label>Features</label>
             <div className="form-check">
