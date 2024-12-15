@@ -6,9 +6,15 @@ import "./PropertyDetail.css";
 import { IoIosArrowDropright } from "react-icons/io";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { FaRupeeSign } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import UserNavbar from "./UserNavbar";
+import { FaMapMarkerAlt, FaBed, FaBath } from "react-icons/fa";
+import { GiHomeGarage } from "react-icons/gi";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 function PropertyDetails() {
   const { id } = useParams();
   const [detail, setDetail] = useState([]);
@@ -17,6 +23,22 @@ function PropertyDetails() {
   const [contact, setContact] = useState("");
   const [message, setMessage] = useState("");
   const [showAllImages, setShowAllImages] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const response = await axios.get(
+        "http://localhost:8000/api/Property/getProperty"
+      );
+      if (response.data.data) {
+        setData(response.data.data);
+        console.log(response.data.data);
+      } else if (!response.data) {
+        console.log("data not found");
+      }
+    };
+    fetch();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +85,7 @@ function PropertyDetails() {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     if (res.data) {
-      console.log(res.data);
+      alert("inquiry fom submite done");
     }
   };
 
@@ -110,6 +132,28 @@ function PropertyDetails() {
   const toggleImages = () => {
     setShowAllImages(!showAllImages); // Toggle image visibility
   };
+  const settings = {
+    dots: true, // Enable dots
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3, // Number of cards to show at once
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <>
       <UserNavbar />
@@ -134,7 +178,7 @@ function PropertyDetails() {
                   <FaLocationDot />
                   {e.city}
                 </small>
-                <span style={{ marginLeft: "50%" }}>
+                <span style={{ marginLeft: "70%" }}>
                   <FaRupeeSign />
                   {e.budget}
                 </span>
@@ -377,6 +421,150 @@ function PropertyDetails() {
             </div>
           );
         })}
+
+        <div className="container">
+          {/* Featured Listings Header */}
+          <div className="header text-center" style={{ marginBottom: "30px" }}>
+            <h2 style={{ fontWeight: "bold", color: "#333" }}>
+              Featured Listings
+            </h2>
+            <p style={{ color: "#777" }}>
+              Browse our wide range of featured properties.
+            </p>
+          </div>
+
+          {/* Carousel */}
+          <Slider {...settings}>
+            {data.map((e) => {
+              const images = e.Image
+                ? e.Image.split(",").map(
+                    (fileName) => `http://localhost:8000/uploads/${fileName}`
+                  )
+                : [];
+
+              return (
+                <div key={e._id}>
+                  <div
+                    className="card"
+                    style={{
+                      width: "300px",
+                      borderRadius: "10px",
+                      boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+                      overflow: "hidden",
+                      margin: "0 auto", // Center align
+                    }}
+                  >
+                    {/* Property Image */}
+                    <Link
+                      to={`/PropertyDetails/${e._id}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div
+                        className="property-image"
+                        style={{ position: "relative" }}
+                      >
+                        <img
+                          className="card-img-top"
+                          src={
+                            images[1] || "https://via.placeholder.com/300x200"
+                          }
+                          alt="Property"
+                          style={{
+                            width: "100%",
+                            height: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <span
+                          className="property-badge"
+                          style={{
+                            position: "absolute",
+                            top: "10px",
+                            left: "10px",
+                            backgroundColor: "#28a745",
+                            color: "#fff",
+                            padding: "5px 10px",
+                            fontSize: "12px",
+                            borderRadius: "3px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {e.propertyStatus || "FOR SALE"}
+                        </span>
+                      </div>
+                    </Link>
+
+                    {/* Property Details */}
+                    <div className="card-body" style={{ padding: "15px" }}>
+                      <h5
+                        className="card-title"
+                        style={{ fontSize: "18px", fontWeight: "bold" }}
+                      >
+                        {e.title || "Light And Modern House"}
+                      </h5>
+                      <p
+                        className="card-text"
+                        style={{ fontSize: "14px", color: "#555" }}
+                      >
+                        <FaMapMarkerAlt
+                          style={{ color: "#007bff", marginRight: "5px" }}
+                        />
+                        {e.location || "Unknown Location"} - Pin{" "}
+                        {e.pincode || "000000"}
+                      </p>
+
+                      {/* Icons for Details */}
+                      <div
+                        className="property-icons"
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          marginTop: "10px",
+                          fontSize: "14px",
+                          color: "#555",
+                        }}
+                      >
+                        <span>
+                          <FaBed
+                            style={{ color: "#007bff", marginRight: "5px" }}
+                          />
+                          {e.bedroom || "3"} Beds
+                        </span>
+                        <span>
+                          <FaBath
+                            style={{ color: "#007bff", marginRight: "5px" }}
+                          />
+                          {e.bathroom || "2"} Baths
+                        </span>
+                        <span>
+                          <GiHomeGarage
+                            style={{ color: "#007bff", marginRight: "5px" }}
+                          />
+                          {e.propertySize || "1950"} m²
+                        </span>
+                      </div>
+
+                      {/* View Details Button */}
+                      <Link
+                        to={`/PropertyDetails/${e._id}`}
+                        className="btn btn-primary"
+                        style={{
+                          marginTop: "15px",
+                          width: "100%",
+                          padding: "10px",
+                          backgroundColor: "#007bff",
+                          borderColor: "#007bff",
+                        }}
+                      >
+                        View Details
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </Slider>
+        </div>
         <Footer />
       </div>
     </>

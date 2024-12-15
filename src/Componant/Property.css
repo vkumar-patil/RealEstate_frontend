@@ -87,3 +87,8 @@ body {
     
   }
   
+  .homepageDiv{
+    background-image: url(
+      "./image/A\ royal\ apartment\ in\ Udaipur\ immersed\ in\ opulence.jpeg");
+background-size: cover;
+  }

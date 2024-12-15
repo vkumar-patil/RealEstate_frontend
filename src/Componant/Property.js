@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
 import UserNavbar from "./UserNavbar";
 import { FaLocationDot } from "react-icons/fa6";
-
+import oneimg from "./image/penthouse experience with a living room that encapsulates luxury, boasting generous seating.jpeg";
+import siximg from "./image/Elevate Your Lifestyle_ Pinnacle of Penthouse Elegance with a View.jpeg";
+import threeimg from "./image/download (10).jpeg";
+import fourimg from "./image/@lucyamich.jpeg";
+import fiveimg from "./image/Interior Sarah Sadeq architects Kuwait.jpeg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Property.css";
 import axios from "axios";
 import Footer from "./Footer";
+import { useMediaQuery } from "react-responsive";
 function Property() {
   const [unitType, setUnitType] = useState("For Rent");
   const [location, setLocation] = useState("any");
@@ -15,7 +20,14 @@ function Property() {
   const [maxPrice, setMaxPrice] = useState("any");
   const [data, setData] = useState([]);
   const [defaultData, setDefaultData] = useState([]);
-
+  const isDesktop = useMediaQuery({ minWidth: 769 });
+  const isTablet = useMediaQuery({ minWidth: 481, maxWidth: 768 });
+  const [showmore, setShowmore] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [message, setMessage] = useState("");
+  //const isMobile = useMediaQuery({ maxWidth: 480 });
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
@@ -58,6 +70,12 @@ function Property() {
     setMaxPrice("any");
   };
 
+  const togleShowmore = () => {
+    setShowmore(!showmore);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <>
       <UserNavbar />
@@ -200,14 +218,14 @@ function Property() {
             return (
               <div
                 className="card "
-                style={{ width: "300px", margin: "40px" }}
+                style={{ width: "320px", margin: "20px" }}
                 key={e._id}
               >
                 <Link to={`/PropertyDetails/${e._id}`}>
                   <img
                     className="card-img-top"
                     src={images[1]}
-                    alt="Card image cap"
+                    alt="image "
                     style={{
                       width: "100%",
                       height: "50vh",
@@ -247,6 +265,204 @@ function Property() {
             );
           })}
         </div>
+      </div>
+      <div className="container " style={{ margin: "20px" }}>
+        <button
+          className="btn btn-primary"
+          onClick={togleShowmore}
+          style={{ marginLeft: "50%" }}
+        >
+          {showmore ? "Showless" : "Load more"}
+        </button>
+        {showmore && (
+          <>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: isDesktop
+                  ? "repeat(5, 1fr)"
+                  : isTablet
+                  ? "repeat(2, 1fr)"
+                  : "1fr",
+                gridTemplateRows: isDesktop ? "repeat(4, 150px)" : "auto",
+                gap: "10px",
+                margin: "20px",
+              }}
+            >
+              <div
+                style={{
+                  borderTopLeftRadius: "10%",
+                  gridColumn: isDesktop ? "1 / 3" : "1 / 2",
+                  gridRow: isDesktop ? "1 / 4" : "1 / 2",
+                }}
+              >
+                <img
+                  src={oneimg}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderTopLeftRadius: "10%",
+                    borderBottomLeftRadius: "10%",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  gridColumn: isDesktop ? "3 / 4" : "1 / 2",
+                  gridRow: "1 / 2",
+                }}
+              >
+                <img src={fourimg} style={{ width: "100%", height: "100%" }} />
+              </div>
+              <div
+                style={{
+                  gridColumn: isDesktop ? "4 / 6" : "1 / 2",
+                  gridRow: "1 / 2",
+                }}
+              >
+                <h2>Wide Selection Of Properties</h2>
+                <p>
+                  "Find Your Dream Property with a Tap!" "Your Key to Buying,
+                  Selling, and Renting Made Easy!" "Turning Listings into Homes,
+                  Hassle-Free." "Simplifying Real Estate, One Property at a
+                  Time." "Explore. Choose. Own – All in One App!" "Property
+                  Deals at Your Fingertips."
+                </p>
+              </div>
+              <div
+                style={{
+                  gridColumn: isDesktop ? "3 / 5" : "1 / 2",
+                  gridRow: isDesktop ? "2 / 4" : "2 / 3",
+                }}
+              >
+                <img src={threeimg} style={{ width: "100%", height: "100%" }} />
+              </div>
+              <div
+                style={{
+                  gridColumn: isDesktop ? "5 / 6" : "1 / 2",
+                  gridRow: "2 / 3",
+                }}
+              >
+                <img
+                  src={fiveimg}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderTopRightRadius: "10%",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  gridColumn: isDesktop ? "5 / 6" : "1 / 2",
+                  gridRow: "3 / 4",
+                }}
+              >
+                <img
+                  src={siximg}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderBottomRightRadius: "10%",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="homepageDiv">
+              <div className="row">
+                <div className="col-md-4">
+                  <h1>Whay Our service is the Perfect Choice ? </h1>
+                  <h2 style={{ marginTop: "50px", color: "white" }}>02</h2>
+                  <p style={{ color: "white" }}>
+                    Our expert team ensures smooth transactions, saving you time
+                    and effort. With transparent pricing and dedicated support,
+                    your satisfaction is our priority. Trust us to turn your
+                    property into a successful sale!"
+                  </p>
+                </div>
+                <div className="col-md-4">
+                  <h2 style={{ color: "white" }}>01</h2>
+                  <p style={{ color: "white" }}>
+                    Our property selling service is your perfect choice because
+                    we offer tailored marketing strategies to maximize
+                    visibility and attract buyers.
+                  </p>
+                  <h2 style={{ color: "white" }}>03</h2>
+                  <p style={{ color: "white" }}>
+                    "Our service leverages advanced technology and market
+                    insights to get the best value for your property.
+                  </p>
+                </div>
+
+                <div className="col-md-4">
+                  <form
+                    className="card-form"
+                    style={{
+                      marginLeft: "10px",
+                      backgroundColor: "whitesmoke",
+                    }}
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSubmit();
+                    }}
+                  >
+                    <h3>Submit an Inquiry</h3>
+                    <h5>Property Consultant</h5>
+                    <div className="form-group">
+                      <label htmlFor="exampleInputEmail1">Username</label>
+                      <input
+                        type="username"
+                        className="form-control"
+                        id="exampleInputusername1"
+                        placeholder="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="exampleInputEmail1">Email address</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="exampleInputEmail1"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="exampleInputtel1">Phone</label>
+                      <input
+                        type="tel"
+                        className="form-control"
+                        id="exampleInputtel1"
+                        placeholder="+91...."
+                        value={contact}
+                        onChange={(e) => setContact(e.target.value)}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="exampleInputtext1">Message</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleInputtext1"
+                        placeholder="Enter text"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                      />
+                    </div>
+                    <button type="submit" className="btn btn-primary">
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <Footer />
     </>

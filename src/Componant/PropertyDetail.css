@@ -203,3 +203,16 @@
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 } */
+.d-flex.overflow-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f5f5f5;
+}
+
+.d-flex.overflow-auto::-webkit-scrollbar {
+  height: 8px;
+}
+
+.d-flex.overflow-auto::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}

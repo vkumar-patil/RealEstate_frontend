@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { AiOutlinePropertySafety } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const UserNavbar = () => {
   const [activeModal, setActiveModal] = useState(null);
@@ -37,9 +38,9 @@ const UserNavbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="">
+              <Link to={"/Property"} className="nav-link">
                 Home <span className="sr-only">(current)</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <button
