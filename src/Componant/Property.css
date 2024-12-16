@@ -89,6 +89,28 @@ body {
   
   .homepageDiv{
     background-image: url(
-      "./image/A\ royal\ apartment\ in\ Udaipur\ immersed\ in\ opulence.jpeg");
-background-size: cover;
+      "./image/20\ Dark\,\ Romantic\ Halloween\ Wedding\ Decor\ Ideas\ you\'ll\ love\ -\ Finds\ For\ Her.jpeg");
+background-size:auto;
   }
+
+  .testimonial-section {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+  }
+  
+  .testimonial-card {
+    flex: 0 0 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .testimonial-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  

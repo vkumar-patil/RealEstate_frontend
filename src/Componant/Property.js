@@ -12,6 +12,7 @@ import "./Property.css";
 import axios from "axios";
 import Footer from "./Footer";
 import { useMediaQuery } from "react-responsive";
+import testimonial from "./ClientComments";
 function Property() {
   const [unitType, setUnitType] = useState("For Rent");
   const [location, setLocation] = useState("any");
@@ -27,7 +28,7 @@ function Property() {
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [message, setMessage] = useState("");
-  //const isMobile = useMediaQuery({ maxWidth: 480 });
+  const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
@@ -73,8 +74,35 @@ function Property() {
   const togleShowmore = () => {
     setShowmore(!showmore);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    const token = localStorage.getItem("token"); // Get token from localStorage
+
+    console.log(username, email, contact, message);
+    // Post inquiry data to your backend
+    const res = await axios.post(
+      "http://localhost:8000/api/Admin/AddInquiry",
+      {
+        username,
+        email,
+        contact,
+        message,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    if (res.data) {
+      alert("inquiry fom submite done");
+    }
+  };
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? testimonial.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === testimonial.length - 1 ? 0 : prevIndex + 1
+    );
   };
   return (
     <>
@@ -206,7 +234,7 @@ function Property() {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container" style={{ marginLeft: "50px" }}>
         <div className="row">
           {data.map((e) => {
             const images = e.Image
@@ -266,11 +294,11 @@ function Property() {
           })}
         </div>
       </div>
-      <div className="container " style={{ margin: "20px" }}>
+      <div className="container " style={{ marginLeft: "30px" }}>
         <button
           className="btn btn-primary"
           onClick={togleShowmore}
-          style={{ marginLeft: "50%" }}
+          style={{ marginLeft: "40%" }}
         >
           {showmore ? "Showless" : "Load more"}
         </button>
@@ -368,7 +396,10 @@ function Property() {
                 />
               </div>
             </div>
-            <div className="homepageDiv">
+            <div
+              className="homepageDiv"
+              style={{ marginLeft: "17px", borderRadius: "10px" }}
+            >
               <div className="row">
                 <div className="col-md-4">
                   <h1>Whay Our service is the Perfect Choice ? </h1>
@@ -400,6 +431,7 @@ function Property() {
                     style={{
                       marginLeft: "10px",
                       backgroundColor: "whitesmoke",
+                      borderRadius: "10px",
                     }}
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -461,10 +493,35 @@ function Property() {
                 </div>
               </div>
             </div>
+            <div
+              className="testimonial-section"
+              style={{
+                marginLeft: "50px",
+                textAlign: "center",
+                marginTop: "20px",
+              }}
+            >
+              <div className="row">
+                {testimonial.map((item, index) => (
+                  <div key={index} className="testimonial-card">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="testimonial-image"
+                    />
+                    <h4>{item.name}</h4>
+                    <p>{item.feedback}</p>
+                    <small>{item.date}</small>
+                  </div>
+                ))}
+              </div>
+            </div>
           </>
         )}
       </div>
-      <Footer />
+      <div className="container-fluid">
+        <Footer />
+      </div>
     </>
   );
 }

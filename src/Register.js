@@ -7,12 +7,8 @@ function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [age, setAge] = useState("");
   const [contact, setContact] = useState("");
-  //const [address, setAddress] = useState("");
-  //const [role, setRole] = useState("");
-  //const [gender, setGender] = useState("");
-  //const [specialist_doctor, setSpecialist] = useState("");
+
   const navigate = useNavigate();
   const handleregister = async (e) => {
     e.preventDefault();

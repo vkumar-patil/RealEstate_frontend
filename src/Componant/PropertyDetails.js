@@ -423,7 +423,6 @@ function PropertyDetails() {
         })}
 
         <div className="container">
-          {/* Featured Listings Header */}
           <div className="header text-center" style={{ marginBottom: "30px" }}>
             <h2 style={{ fontWeight: "bold", color: "#333" }}>
               Featured Listings
@@ -433,7 +432,6 @@ function PropertyDetails() {
             </p>
           </div>
 
-          {/* Carousel */}
           <Slider {...settings}>
             {data.map((e) => {
               const images = e.Image
@@ -454,7 +452,6 @@ function PropertyDetails() {
                       margin: "0 auto", // Center align
                     }}
                   >
-                    {/* Property Image */}
                     <Link
                       to={`/PropertyDetails/${e._id}`}
                       style={{ textDecoration: "none" }}
@@ -494,7 +491,6 @@ function PropertyDetails() {
                       </div>
                     </Link>
 
-                    {/* Property Details */}
                     <div className="card-body" style={{ padding: "15px" }}>
                       <h5
                         className="card-title"
@@ -513,7 +509,6 @@ function PropertyDetails() {
                         {e.pincode || "000000"}
                       </p>
 
-                      {/* Icons for Details */}
                       <div
                         className="property-icons"
                         style={{
@@ -544,7 +539,6 @@ function PropertyDetails() {
                         </span>
                       </div>
 
-                      {/* View Details Button */}
                       <Link
                         to={`/PropertyDetails/${e._id}`}
                         className="btn btn-primary"
