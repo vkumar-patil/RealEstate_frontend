@@ -3,8 +3,9 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { AiOutlinePropertySafety } from "react-icons/ai";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const UserNavbar = () => {
+  const navigate = useNavigate();
   const [activeModal, setActiveModal] = useState(null);
 
   const openModal = (modalId) => {
@@ -14,24 +15,39 @@ const UserNavbar = () => {
   const closeModal = () => {
     setActiveModal(null);
   };
-
+  const handlelogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
   return (
     <>
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link className="navbar-brand-info">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <li class="navbar-brand" style={{ listStyle: "none" }}>
           <AiOutlinePropertySafety />
           Logo
-        </Link>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <Link to={"/Property"} className="nav-link">
-                Home <span className="sr-only">(current)</span>
-              </Link>
+        </li>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <li class="nav-link">
+                <Link to={"/Property"} className="nav-link">
+                  Home <span class="sr-only">(current)</span>
+                </Link>
+              </li>
             </li>
-            <li className="nav-item">
+            <li class="nav-item">
               <button
                 className="nav-link btn btn-link"
                 onClick={() => openModal("explore")}
@@ -40,7 +56,8 @@ const UserNavbar = () => {
                 Explore
               </button>
             </li>
-            <li className="nav-item">
+
+            <li class="nav-item">
               <button
                 className="nav-link btn btn-link"
                 onClick={() => openModal("aboutUs")}
@@ -56,17 +73,23 @@ const UserNavbar = () => {
                 Contact Us
               </button>
             </li>
-            <button
-              className="btn btn-primary"
-              onClick={() => openModal("requestCall")}
-            >
-              <FaPhoneAlt />
-              Request Call
-            </button>
+            <li className="nav-item">
+              <button
+                className="btn btn-primary"
+                onClick={() => openModal("requestCall")}
+              >
+                <FaPhoneAlt />
+                Request Call
+              </button>
+            </li>
+            <li className="nav-item ml-3 ">
+              <button className="btn btn-danger" onClick={handlelogout}>
+                LogOut
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
-
       {/* Modals */}
       {activeModal === "explore" && (
         <Modal title="Explore" onClose={closeModal}>

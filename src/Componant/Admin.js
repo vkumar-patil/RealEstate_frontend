@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Admin() {
   const [title, setTitle] = useState("");
@@ -377,6 +378,9 @@ function Admin() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <Link to={"/AdminHomepage"}>
+          <button className="btn btn-secondary ml-2">Back To Home</button>
+        </Link>
       </form>
     </div>
   );

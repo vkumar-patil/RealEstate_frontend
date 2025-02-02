@@ -2,21 +2,28 @@ import React, { useState } from "react";
 import { MdNotificationsActive } from "react-icons/md";
 import { AiOutlinePropertySafety } from "react-icons/ai";
 import InquiryModal from "./InquiryModel";
-
+import { useNavigate } from "react-router-dom";
 function AdminNavbar() {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
   const handleModalToggle = () => {
     setShowModal(!showModal);
   };
 
+  const handlelogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand-info" href="">
+        <li className="navbar-brand-info" style={{ listStyle: "none" }}>
           <AiOutlinePropertySafety />
           Logo
-        </a>
+        </li>
         <button
           className="navbar-toggler"
           type="button"
@@ -32,17 +39,22 @@ function AdminNavbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="">
+              <button className="btn mr-2">
                 Home <span className="sr-only">(current)</span>
-              </a>
+              </button>
             </li>
             <li className="nav-item">
               <button
-                className="btn btn-link nav-link"
+                className="btn btn-worn nav-link"
                 onClick={handleModalToggle}
               >
+                <strong>Inquiry Notification</strong>
                 <MdNotificationsActive />
-                Inquiry Notification
+              </button>
+            </li>
+            <li className="nav-item">
+              <button className="btn btn-danger ml-2" onClick={handlelogout}>
+                LogOut
               </button>
             </li>
           </ul>

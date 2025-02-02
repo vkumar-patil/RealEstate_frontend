@@ -1,4 +1,4 @@
-.loginheding{
+/* .loginheding{
     margin-left: 40%;
     color: blue;
 }
@@ -10,4 +10,100 @@
     background-color: rgb(240, 243, 245);
     padding: 20px;
     border-style: dashed;
+} */
+
+/* Centering and background */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+}
+
+/* Form styling */
+.login-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+/* Heading */
+.login-heading {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* Input fields */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+}
+
+.input-icon {
+    display: flex;
+    align-items: center;
+    background: #eef2f7;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.input-icon .icon {
+    margin-right: 10px;
+    color: #007bff;
+}
+
+.input-icon input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background: transparent;
+    font-size: 16px;
+}
+
+/* Button */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Register link */
+.register-link {
+    margin-top: 10px;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }

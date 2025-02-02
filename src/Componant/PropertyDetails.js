@@ -86,6 +86,10 @@ function PropertyDetails() {
     );
     if (res.data) {
       alert("inquiry fom submite done");
+      setUsername(" ");
+      setEmail(" ");
+      setContact(" ");
+      setMessage(" ");
     }
   };
 
@@ -172,17 +176,17 @@ function PropertyDetails() {
           console.log("Processed images for property", index + 1, ":", images);
           return (
             <div className="card" style={{ margin: "20px" }} key={e._id}>
-              <h2>
-                {e.title}{" "}
-                <small>
+              <div>
+                <h4> {e.title} </h4>
+                <small className="location">
                   <FaLocationDot />
                   {e.city}
                 </small>
-                <span style={{ marginLeft: "70%" }}>
+                <span className="rupay">
                   <FaRupeeSign />
                   {e.budget}
                 </span>
-              </h2>
+              </div>
               <div style={{ display: "flex" }}>
                 <button
                   className="btn btn-secondary"
@@ -326,16 +330,18 @@ function PropertyDetails() {
               <table className="responsive-table">
                 <tr>
                   <th>Property Type</th>
-                  <th>Size(m2)</th>
-                  <th>Bedrooms</th>
-                  <th>Bathrooms</th>
-                  <th>Garage</th>
-                </tr>
-                <tr>
                   <td>{e.propertyType}</td>
+
+                  <th>Size(m2)</th>
                   <td>{e.propertySize}</td>
+
+                  <th>Bedrooms</th>
                   <td>{e.bedroom}</td>
+
+                  <th>Bathrooms</th>
                   <td>{e.bathroom}</td>
+
+                  <th>Garage</th>
                   <td>{e.garage}</td>
                 </tr>
               </table>

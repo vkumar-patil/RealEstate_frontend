@@ -59,7 +59,7 @@
 
 .responsive-table th, .responsive-table td {
   padding: 12px;
-  text-align: left;
+  text-align: center;
   border: 1px solid #ddd;
 }
 
@@ -124,7 +124,25 @@
     grid-template-columns: 1fr;
   }
 }
+.location{
+  font-size: larger;}
+.rupay{
+  margin-left: 70%; font-size:xx-large;}
+@media (max-width:770px){
+  .location{
+    font-size: larger;}
+  .rupay{
+    margin-left: 50%; font-size:larger;}
+}
 
+@media(max-width:500px){
+   .rupay{
+  
+     font-size: small;
+     margin-left: 50%
+  }
+  
+}
 
 
 /* Main Image Styling */

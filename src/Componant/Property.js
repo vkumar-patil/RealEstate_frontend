@@ -45,6 +45,32 @@ function Property() {
     fetch();
   }, []);
 
+  // const handleSearch = async (event) => {
+  //   event.preventDefault(); // Prevent page reload
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:8000/api/Admin/getfilterdata",
+  //       {
+  //         params: {
+  //           city: location !== "any" ? location : undefined,
+  //           minBudget: maxPrice !== "any" ? 0 : undefined,
+  //           maxBudget: maxPrice !== "any" ? maxPrice : undefined,
+  //           propertyType: unitType !== "For Rent" ? unitType : undefined,
+  //         },
+  //       }
+  //     );
+
+  //     if (response.data.length > 0) {
+  //       setData(response.data); // Update state with filtered properties
+  //     } else {
+  //       setData([]);
+  //       console.log("No properties found");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching filtered properties:", error);
+  //   }
+  // };
+
   const handleSearch = (event) => {
     event.preventDefault(); // Prevent page reload
     const filteredData = defaultData.filter((property) => {
@@ -74,7 +100,8 @@ function Property() {
   const togleShowmore = () => {
     setShowmore(!showmore);
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const token = localStorage.getItem("token"); // Get token from localStorage
 
     console.log(username, email, contact, message);
@@ -91,6 +118,10 @@ function Property() {
     );
     if (res.data) {
       alert("inquiry fom submite done");
+      setUsername(" ");
+      setContact(" ");
+      setEmail(" ");
+      setMessage(" ");
     }
   };
   const handlePrev = () => {
@@ -128,7 +159,7 @@ function Property() {
           <div className="search-container" style={{ width: "100%" }}>
             <form>
               <div className="row" style={{ marginLeft: "30px" }}>
-                <div className="filters">
+                {/* <div className="filters">
                   <div className="radio-buttons">
                     <input
                       type="radio"
@@ -149,9 +180,9 @@ function Property() {
                     />
                     <label htmlFor="forSale">For Sale</label>
                   </div>
-                </div>
+                </div> */}
               </div>
-              <div className="row" style={{ marginLeft: "30px" }}>
+              <div className="row" style={{ marginLeft: "35%" }}>
                 <div className="filters">
                   <label>LOCATION</label>
                   <select
@@ -161,15 +192,13 @@ function Property() {
                     onChange={(e) => setLocation(e.target.value)}
                   >
                     <option value="allCities">All Cities</option>
-                    <option value="mumbai">mumbai</option>;
-                    <option value="latur">Latur</option>
-                    <option value="delhi">Delhi</option>
-                    <option value="pune">Pune</option>
-                    <option value="avarangabad">Avarangabad</option>
+                    {data.map((e) => {
+                      return <option value={e.city}>{e.city}</option>;
+                    })}
                   </select>
                 </div>
 
-                <div className="filters" style={{ marginLeft: "20px" }}>
+                {/* <div className="filters" style={{ marginLeft: "20px" }}>
                   <label>PROPERTY SIZE</label>
                   <select
                     id="propertySize"
@@ -178,12 +207,14 @@ function Property() {
                     onChange={(e) => setPropertySize(e.target.value)}
                   >
                     <option value="allSizes">All Sizes</option>
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
+                    {data.map((e) => {
+                      return (
+                        <option value={e.propertySize}>{e.propertySize}</option>
+                      );
+                    })}
                   </select>
-                </div>
-                <div className="filters" style={{ marginLeft: "50px" }}>
+                </div> */}
+                {/* <div className="filters" style={{ marginLeft: "50px" }}>
                   <label>BEDROOMS</label>
                   <select
                     id="bedrooms"
@@ -212,7 +243,7 @@ function Property() {
                     <option value="200000">200,000</option>
                     <option value="500000">500,000</option>
                   </select>
-                </div>
+                </div> */}
 
                 <button
                   className="btn btn-primary"
@@ -298,7 +329,7 @@ function Property() {
         <button
           className="btn btn-primary"
           onClick={togleShowmore}
-          style={{ marginLeft: "40%" }}
+          style={{ marginLeft: "44%" }}
         >
           {showmore ? "Showless" : "Load more"}
         </button>
@@ -433,10 +464,7 @@ function Property() {
                       backgroundColor: "whitesmoke",
                       borderRadius: "10px",
                     }}
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      handleSubmit();
-                    }}
+                    onSubmit={handleSubmit}
                   >
                     <h3>Submit an Inquiry</h3>
                     <h5>Property Consultant</h5>
