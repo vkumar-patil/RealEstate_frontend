@@ -19,7 +19,6 @@ const Footer = () => {
           <div className="footer-logo">
             <div className="logo">
               {" "}
-              {/* Replace with an actual logo image if needed */}
               <span>Logo</span>
             </div>
             <p>

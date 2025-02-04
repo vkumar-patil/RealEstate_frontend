@@ -12,13 +12,9 @@ import "./Property.css";
 import axios from "axios";
 import Footer from "./Footer";
 import { useMediaQuery } from "react-responsive";
-import testimonial from "./ClientComments";
+import Testimonial from "../Testimonial";
 function Property() {
-  const [unitType, setUnitType] = useState("For Rent");
   const [location, setLocation] = useState("any");
-  const [propertySize, setPropertySize] = useState("allSizes");
-  const [bedroom, setBedrooms] = useState("any");
-  const [maxPrice, setMaxPrice] = useState("any");
   const [data, setData] = useState([]);
   const [defaultData, setDefaultData] = useState([]);
   const isDesktop = useMediaQuery({ minWidth: 769 });
@@ -28,7 +24,6 @@ function Property() {
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [message, setMessage] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
@@ -45,43 +40,13 @@ function Property() {
     fetch();
   }, []);
 
-  // const handleSearch = async (event) => {
-  //   event.preventDefault(); // Prevent page reload
-  //   try {
-  //     const response = await axios.get(
-  //       "http://localhost:8000/api/Admin/getfilterdata",
-  //       {
-  //         params: {
-  //           city: location !== "any" ? location : undefined,
-  //           minBudget: maxPrice !== "any" ? 0 : undefined,
-  //           maxBudget: maxPrice !== "any" ? maxPrice : undefined,
-  //           propertyType: unitType !== "For Rent" ? unitType : undefined,
-  //         },
-  //       }
-  //     );
-
-  //     if (response.data.length > 0) {
-  //       setData(response.data); // Update state with filtered properties
-  //     } else {
-  //       setData([]);
-  //       console.log("No properties found");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching filtered properties:", error);
-  //   }
-  // };
-
   const handleSearch = (event) => {
     event.preventDefault(); // Prevent page reload
     const filteredData = defaultData.filter((property) => {
       return (
-        (unitType === "For Rent" || property.unitType === unitType) &&
-        (location === "any" ||
-          (property.city &&
-            property.city.toLowerCase() === location.toLowerCase())) &&
-        (propertySize === "allSizes" || property.size === propertySize) &&
-        (bedroom === "any" || property.bedroom === parseInt(bedroom)) &&
-        (maxPrice === "any" || parseInt(property.price) <= parseInt(maxPrice))
+        location === "any" ||
+        (property.city &&
+          property.city.toLowerCase() === location.toLowerCase())
       );
     });
     setData(filteredData); // Update data with filtered results
@@ -90,11 +55,7 @@ function Property() {
   const resetFilters = (event) => {
     event.preventDefault();
     setData(defaultData); // Reset data
-    setUnitType("For Rent");
     setLocation("any");
-    setPropertySize("allSizes");
-    setBedrooms("any");
-    setMaxPrice("any");
   };
 
   const togleShowmore = () => {
@@ -124,17 +85,7 @@ function Property() {
       setMessage(" ");
     }
   };
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? testimonial.length - 1 : prevIndex - 1
-    );
-  };
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === testimonial.length - 1 ? 0 : prevIndex + 1
-    );
-  };
   return (
     <>
       <UserNavbar />
@@ -152,36 +103,11 @@ function Property() {
             right: "10%",
           }}
         >
-          <h1>Your Dream Home </h1>
-          <h3 style={{ color: "white", textAlign: "center" }}>
-            Is One Click Away
-          </h3>
+          <h1 className="MainTitle">Your Dream Home </h1>
+          <h1 className="Secondtitle">Is One Click Away</h1>
           <div className="search-container" style={{ width: "100%" }}>
             <form>
-              <div className="row" style={{ marginLeft: "30px" }}>
-                {/* <div className="filters">
-                  <div className="radio-buttons">
-                    <input
-                      type="radio"
-                      id="forRent"
-                      name="unitType"
-                      value="For Rent"
-                      checked={unitType === "For Rent"}
-                      onChange={() => setUnitType("For Rent")}
-                    />
-                    <label htmlFor="forRent">For Rent</label>
-                    <input
-                      type="radio"
-                      id="forSale"
-                      name="unitType"
-                      value="For Sale"
-                      checked={unitType === "For Sale"}
-                      onChange={() => setUnitType("For Sale")}
-                    />
-                    <label htmlFor="forSale">For Sale</label>
-                  </div>
-                </div> */}
-              </div>
+              <div className="row" style={{ marginLeft: "30px" }}></div>
               <div className="row" style={{ marginLeft: "35%" }}>
                 <div className="filters">
                   <label>LOCATION</label>
@@ -197,66 +123,14 @@ function Property() {
                     })}
                   </select>
                 </div>
-
-                {/* <div className="filters" style={{ marginLeft: "20px" }}>
-                  <label>PROPERTY SIZE</label>
-                  <select
-                    id="propertySize"
-                    name="propertySize"
-                    value={propertySize}
-                    onChange={(e) => setPropertySize(e.target.value)}
-                  >
-                    <option value="allSizes">All Sizes</option>
-                    {data.map((e) => {
-                      return (
-                        <option value={e.propertySize}>{e.propertySize}</option>
-                      );
-                    })}
-                  </select>
-                </div> */}
-                {/* <div className="filters" style={{ marginLeft: "50px" }}>
-                  <label>BEDROOMS</label>
-                  <select
-                    id="bedrooms"
-                    name="bedrooms"
-                    value={bedroom}
-                    onChange={(e) => setBedrooms(e.target.value)}
-                  >
-                    <option value="any">Any</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4+</option>
-                  </select>
-                </div>
-
-                <div className="filters" style={{ marginLeft: "30px" }}>
-                  <label>BUDGET</label>
-                  <select
-                    id="maxPrice"
-                    name="maxPrice"
-                    value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value)}
-                  >
-                    <option value="any">Max. Price</option>
-                    <option value="100000">100,000</option>
-                    <option value="200000">200,000</option>
-                    <option value="500000">500,000</option>
-                  </select>
-                </div> */}
-
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary "
+                  id="serch"
                   onClick={handleSearch}
-                  style={{ height: "6vh", marginTop: "5vh", marginLeft: "1vh" }}
                 >
                   Search
                 </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={resetFilters}
-                  style={{ height: "6vh", marginTop: "5vh", marginLeft: "1vh" }}
-                >
+                <button className="btn btn-secondary" onClick={resetFilters}>
                   Reset Filters
                 </button>
               </div>
@@ -264,8 +138,7 @@ function Property() {
           </div>
         </div>
       </div>
-
-      <div className="container" style={{ marginLeft: "50px" }}>
+      <div className="container-fluid">
         <div className="row">
           {data.map((e) => {
             const images = e.Image
@@ -277,14 +150,14 @@ function Property() {
             return (
               <div
                 className="card "
-                style={{ width: "320px", margin: "20px" }}
+                style={{ width: "350px", margin: "20px" }}
                 key={e._id}
               >
                 <Link to={`/PropertyDetails/${e._id}`}>
                   <img
                     className="card-img-top"
                     src={images[1]}
-                    alt="image "
+                    alt="pic"
                     style={{
                       width: "100%",
                       height: "50vh",
@@ -325,14 +198,15 @@ function Property() {
           })}
         </div>
       </div>
-      <div className="container " style={{ marginLeft: "30px" }}>
-        <button
-          className="btn btn-primary"
-          onClick={togleShowmore}
-          style={{ marginLeft: "44%" }}
+      <div className="container-fluid  ">
+        <div
+          className="d-flex align-items-center justify-content-center"
+          style={{ width: "100%" }}
         >
-          {showmore ? "Showless" : "Load more"}
-        </button>
+          <button className="btn btn-primary " onClick={togleShowmore}>
+            {showmore ? "Showless" : "Load more"}
+          </button>
+        </div>
         {showmore && (
           <>
             <div
@@ -357,6 +231,7 @@ function Property() {
               >
                 <img
                   src={oneimg}
+                  alt="pic"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -371,7 +246,11 @@ function Property() {
                   gridRow: "1 / 2",
                 }}
               >
-                <img src={fourimg} style={{ width: "100%", height: "100%" }} />
+                <img
+                  src={fourimg}
+                  alt="pic"
+                  style={{ width: "100%", height: "100%" }}
+                />
               </div>
               <div
                 style={{
@@ -394,7 +273,11 @@ function Property() {
                   gridRow: isDesktop ? "2 / 4" : "2 / 3",
                 }}
               >
-                <img src={threeimg} style={{ width: "100%", height: "100%" }} />
+                <img
+                  src={threeimg}
+                  alt="pic"
+                  style={{ width: "100%", height: "100%" }}
+                />
               </div>
               <div
                 style={{
@@ -404,6 +287,7 @@ function Property() {
               >
                 <img
                   src={fiveimg}
+                  alt="pic"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -419,6 +303,7 @@ function Property() {
               >
                 <img
                   src={siximg}
+                  alt="pic"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -427,10 +312,7 @@ function Property() {
                 />
               </div>
             </div>
-            <div
-              className="homepageDiv"
-              style={{ marginLeft: "17px", borderRadius: "10px" }}
-            >
+            <div className="homepageDiv" style={{ borderRadius: "10px" }}>
               <div className="row">
                 <div className="col-md-4">
                   <h1>Whay Our service is the Perfect Choice ? </h1>
@@ -521,29 +403,7 @@ function Property() {
                 </div>
               </div>
             </div>
-            <div
-              className="testimonial-section"
-              style={{
-                marginLeft: "50px",
-                textAlign: "center",
-                marginTop: "20px",
-              }}
-            >
-              <div className="row">
-                {testimonial.map((item, index) => (
-                  <div key={index} className="testimonial-card">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="testimonial-image"
-                    />
-                    <h4>{item.name}</h4>
-                    <p>{item.feedback}</p>
-                    <small>{item.date}</small>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <Testimonial />
           </>
         )}
       </div>

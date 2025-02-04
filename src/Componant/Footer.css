@@ -1,12 +1,17 @@
 .footer {
     background-color: #333; /* Dark background */
     color: #fff; /* White text */
+    margin: 0%;
     padding: 20px;
   }
-  
+  @media(max-width:"400px"){
+    .footer{
+      margin-left: 50px;
+    }
+  }
   .footer-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0%;
     text-align: center;
   }
   

@@ -161,7 +161,7 @@ function PropertyDetails() {
   return (
     <>
       <UserNavbar />
-      <div className="container">
+      <div className="container-fluid">
         {detail.map((e, index) => {
           // Process images to avoid duplicates
           const images = e.Image
@@ -202,7 +202,7 @@ function PropertyDetails() {
                 </button>
               </div>
 
-              <div className="container">
+              <div className="container-fluid">
                 <div className="row">
                   <div className="col-md-8">
                     {/* Displaying images as thumbnails */}
