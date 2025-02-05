@@ -4,6 +4,8 @@ import { FaLocationDot } from "react-icons/fa6";
 import { AiOutlinePropertySafety } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
+
 const UserNavbar = () => {
   const navigate = useNavigate();
   const [activeModal, setActiveModal] = useState(null);
@@ -23,9 +25,11 @@ const UserNavbar = () => {
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <li class="navbar-brand" style={{ listStyle: "none" }}>
+        <li
+          class="navbar-brand"
+          style={{ listStyle: "none", fontSize: "2rem" }}
+        >
           <AiOutlinePropertySafety />
-          Logo
         </li>
         <button
           class="navbar-toggler"
@@ -40,12 +44,16 @@ const UserNavbar = () => {
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <li class="nav-link">
-                <Link to={"/Property"} className="nav-link">
-                  Home <span class="sr-only">(current)</span>
+            <li
+              class="nav-item "
+              style={{ listStyleType: "none", color: "black" }}
+            >
+              <button className="nav-link btn btn-link">
+                <Link to={"/Property"}>
+                  <FaHome />
+                  Home
                 </Link>
-              </li>
+              </button>
             </li>
             <li class="nav-item">
               <button
@@ -73,7 +81,7 @@ const UserNavbar = () => {
                 Contact Us
               </button>
             </li>
-            <li className="nav-item">
+            <li className="nav-item mr-3">
               <button
                 className="btn btn-primary"
                 onClick={() => openModal("requestCall")}
@@ -82,7 +90,7 @@ const UserNavbar = () => {
                 Request Call
               </button>
             </li>
-            <li className="nav-item ml-3 ">
+            <li className="nav-item  ">
               <button className="btn btn-danger" onClick={handlelogout}>
                 LogOut
               </button>

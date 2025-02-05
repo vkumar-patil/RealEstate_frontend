@@ -392,21 +392,21 @@ function PropertyDetails() {
                 <table className="responsive-table">
                   <tr>
                     <td>
-                      <strong>Property Id :</strong>
+                      <strong>Property Id </strong>
                     </td>
                     <td>{e._id}</td>
                     <td>
-                      <strong>Property Size:</strong>
+                      <strong>Property Size</strong>
                     </td>
                     <td>{e.propertySize}</td>
                   </tr>
                   <tr>
                     <td>
-                      <strong>Property Type:</strong>
+                      <strong>Property Type</strong>
                     </td>
                     <td>{e.propertyType}</td>
                     <td>
-                      <strong>Property Status:</strong>
+                      <strong>Property Status</strong>
                     </td>
                     <td>{e.propertyStatus}</td>
                   </tr>

@@ -107,9 +107,8 @@ function Property() {
           <h1 className="Secondtitle">Is One Click Away</h1>
           <div className="search-container" style={{ width: "100%" }}>
             <form>
-              <div className="row" style={{ marginLeft: "30px" }}></div>
-              <div className="row" style={{ marginLeft: "35%" }}>
-                <div className="filters">
+              <div className="row">
+                <div className="filters col-md-6">
                   <label>LOCATION</label>
                   <select
                     id="location"
@@ -123,16 +122,20 @@ function Property() {
                     })}
                   </select>
                 </div>
-                <button
-                  className="btn btn-primary "
-                  id="serch"
-                  onClick={handleSearch}
-                >
-                  Search
-                </button>
-                <button className="btn btn-secondary" onClick={resetFilters}>
-                  Reset Filters
-                </button>
+                <div className="col-md-4">
+                  <button
+                    className="btn btn-primary serchbtn"
+                    onClick={handleSearch}
+                  >
+                    Search
+                  </button>
+                  <button
+                    className="btn btn-secondary resethbtn"
+                    onClick={resetFilters}
+                  >
+                    Reset
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -150,7 +153,7 @@ function Property() {
             return (
               <div
                 className="card "
-                style={{ width: "350px", margin: "20px" }}
+                style={{ width: "350px", margin: "20px", borderRadius: "20px" }}
                 key={e._id}
               >
                 <Link to={`/PropertyDetails/${e._id}`}>
@@ -162,6 +165,8 @@ function Property() {
                       width: "100%",
                       height: "50vh",
                       position: "relative",
+                      borderTopRightRadius: "20px",
+                      borderTopLeftRadius: "20px",
                     }}
                   />
                   <span
@@ -169,10 +174,10 @@ function Property() {
                       position: "absolute",
                       top: "10px",
                       left: "10px",
-                      backgroundColor: "rgba(0, 0, 0, 0.5)",
+                      backgroundColor: "rgba(8, 193, 26, 0.5)",
                       color: "white",
                       padding: "5px",
-                      borderRadius: "3px",
+                      borderRadius: "5px",
                       fontSize: "14px",
                     }}
                   >
@@ -198,12 +203,12 @@ function Property() {
           })}
         </div>
       </div>
-      <div className="container-fluid  ">
+      <div className="container-fluid">
         <div
           className="d-flex align-items-center justify-content-center"
           style={{ width: "100%" }}
         >
-          <button className="btn btn-primary " onClick={togleShowmore}>
+          <button className="btn btn-primary m-2 " onClick={togleShowmore}>
             {showmore ? "Showless" : "Load more"}
           </button>
         </div>
@@ -259,7 +264,7 @@ function Property() {
                 }}
               >
                 <h2>Wide Selection Of Properties</h2>
-                <p>
+                <p style={{ fontSize: "1rem" }}>
                   "Find Your Dream Property with a Tap!" "Your Key to Buying,
                   Selling, and Renting Made Easy!" "Turning Listings into Homes,
                   Hassle-Free." "Simplifying Real Estate, One Property at a
@@ -315,7 +320,9 @@ function Property() {
             <div className="homepageDiv" style={{ borderRadius: "10px" }}>
               <div className="row">
                 <div className="col-md-4">
-                  <h1>Whay Our service is the Perfect Choice ? </h1>
+                  <h1 style={{ color: "white" }}>
+                    Whay Our service is the Perfect Choice ?{" "}
+                  </h1>
                   <h2 style={{ marginTop: "50px", color: "white" }}>02</h2>
                   <p style={{ color: "white" }}>
                     Our expert team ensures smooth transactions, saving you time

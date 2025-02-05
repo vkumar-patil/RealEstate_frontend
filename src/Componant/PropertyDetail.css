@@ -21,7 +21,13 @@
   overflow: hidden; /* Hide anything that overflows */
   border-radius: 10px;
 }
-
+.thumbnail:hover {
+  transform: scale(1.9);
+  /* width: 120px;  
+  height: 120px;  
+  overflow: hidden; 
+  border-radius: 10px; */
+}
 .thumbnail img {
   width: 100%;  /* Stretch image to cover the container */
   height: 100%;  /* Stretch image to cover the container */
@@ -31,7 +37,7 @@
 }
 
 .thumbnail img:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
