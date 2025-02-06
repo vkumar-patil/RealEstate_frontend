@@ -32,7 +32,7 @@ body {
     font-size: 40px;
     font-weight: bolder;
     text-align: center;
-    color:rgb(12, 253, 225);
+    color:rgb(13, 14, 13);
   }
   .search-container {
     max-width: 900px;
@@ -72,9 +72,7 @@ background-size:auto;
   #location{
     margin-bottom: 20px;
   }
-  /* @media screen and (max-width:"480"){
-
-    .serchbtn{
-      margin: none;
-    }
-  } */
+  .BuyreCart{
+    transition: 1s;
+    transform: scale(1.05);
+  }

@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 import AdminNavbar from "./Componant/AdminNavbar";
-
+import "./AdminHomepage.css";
 function AdminHomepage() {
-  const { id } = useParams();
-
+  //const { id } = useParams();
   const [data, setData] = useState([]);
 
   const handleDelete = async (id) => {
@@ -24,7 +23,6 @@ function AdminHomepage() {
       );
 
       if (response.status === 200) {
-        // Remove the deleted property from the state
         setData(data.filter((item) => item.id !== id));
         alert("Property deleted successfully!");
       } else {
@@ -36,7 +34,7 @@ function AdminHomepage() {
     }
   };
   useEffect(() => {
-    fetch = async () => {
+    const fetch = async () => {
       const response = await axios.get(
         "http://localhost:8000/api/Property/getProperty"
       );
@@ -53,10 +51,15 @@ function AdminHomepage() {
   return (
     <>
       <AdminNavbar />
-      <Link to={"/Admin"}>
-        <button style={{ borderRadius: "10px" }}>Add New Property</button>
+      <Link to={"/Admin"} style={{ textDecoration: "none" }}>
+        <button
+          className="mt-1"
+          style={{ borderRadius: "10px", marginLeft: "15px" }}
+        >
+          Add New Property
+        </button>
       </Link>
-      <div className="container">
+      <div className="container-fluid mt-5">
         <div className="row">
           {data.map((e) => {
             const image = e.Image
@@ -66,29 +69,36 @@ function AdminHomepage() {
               : [];
 
             return (
-              <div className="card " style={{ width: "300px", margin: "40px" }}>
-                <Link to={`/PropertyEditDel/${e._id}`}>
-                  <img
-                    className="card-img-top"
-                    src={image[1]}
-                    alt="Card image cap"
-                    style={{ width: "100%", height: "40vh" }}
-                  />
-                </Link>
+              <div
+                className="card AdminCart "
+                style={{ width: "350px", margin: "20px", borderRadius: "20px" }}
+                key={e._id}
+              >
+                <img
+                  className="card-img-top"
+                  src={image[1]}
+                  alt="Card  cap"
+                  style={{
+                    width: "100%",
+                    height: "40vh",
+                    borderTopRightRadius: "20px",
+                    borderTopLeftRadius: "20px",
+                  }}
+                />
                 <div className="card-body">
-                  <h5 className="card-title">{e.title}Card title</h5>
+                  <h5 className="card-title">{e.title}</h5>
                   <p className="card-text">Some quick exampl</p>
                   <Link
                     to={`/PropertyEditDel/${e._id}`}
                     className="btn btn-primary"
+                    style={{ listStyle: "none" }}
                   >
                     Show intrested & Edit
                   </Link>
                   <button
-                    className="btn btn-danger ml-1"
+                    className="btn btn-danger ml-2"
                     onClick={() => handleDelete(e._id)}
                   >
-                    {" "}
                     Delete
                   </button>
                 </div>

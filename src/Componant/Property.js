@@ -152,7 +152,7 @@ function Property() {
             console.log(images);
             return (
               <div
-                className="card "
+                className="card BuyreCart"
                 style={{ width: "350px", margin: "20px", borderRadius: "20px" }}
                 key={e._id}
               >

@@ -157,7 +157,12 @@ function PropertyDetails() {
       },
     ],
   };
-
+  const handleScroll = () => {
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <UserNavbar />
@@ -437,7 +442,6 @@ function PropertyDetails() {
               Browse our wide range of featured properties.
             </p>
           </div>
-
           <Slider {...settings}>
             {data.map((e) => {
               const images = e.Image
@@ -461,6 +465,7 @@ function PropertyDetails() {
                     <Link
                       to={`/PropertyDetails/${e._id}`}
                       style={{ textDecoration: "none" }}
+                      onClick={handleScroll}
                     >
                       <div
                         className="property-image"
@@ -555,6 +560,7 @@ function PropertyDetails() {
                           backgroundColor: "#007bff",
                           borderColor: "#007bff",
                         }}
+                        onClick={handleScroll}
                       >
                         View Details
                       </Link>

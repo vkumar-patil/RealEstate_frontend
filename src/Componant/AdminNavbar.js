@@ -3,6 +3,9 @@ import { MdNotificationsActive } from "react-icons/md";
 import { AiOutlinePropertySafety } from "react-icons/ai";
 import InquiryModal from "./InquiryModel";
 import { useNavigate } from "react-router-dom";
+import { LuLogOut } from "react-icons/lu";
+import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
 function AdminNavbar() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -20,9 +23,11 @@ function AdminNavbar() {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <li className="navbar-brand-info" style={{ listStyle: "none" }}>
+        <li
+          className="navbar-brand-info"
+          style={{ listStyle: "none", fontSize: "2rem" }}
+        >
           <AiOutlinePropertySafety />
-          Logo
         </li>
         <button
           className="navbar-toggler"
@@ -39,13 +44,18 @@ function AdminNavbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
-              <button className="btn mr-2">
-                Home <span className="sr-only">(current)</span>
+              <button className="nav-link btn btn-link mr-2">
+                <Link
+                  to="/AdminHomepage"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <FaHome /> Home <span className="sr-only">(current)</span>
+                </Link>
               </button>
             </li>
             <li className="nav-item">
               <button
-                className="btn btn-worn nav-link"
+                className="nav-link btn btn-link mr-2"
                 onClick={handleModalToggle}
               >
                 <strong>Inquiry Notification</strong>
@@ -53,7 +63,12 @@ function AdminNavbar() {
               </button>
             </li>
             <li className="nav-item">
-              <button className="btn btn-danger ml-2" onClick={handlelogout}>
+              <button
+                className="nav-link btn btn-link"
+                onClick={handlelogout}
+                style={{ color: "red" }}
+              >
+                <LuLogOut />
                 LogOut
               </button>
             </li>

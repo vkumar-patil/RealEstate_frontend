@@ -5,6 +5,7 @@ import { AiOutlinePropertySafety } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
+import { LuLogOut } from "react-icons/lu";
 
 const UserNavbar = () => {
   const navigate = useNavigate();
@@ -44,12 +45,12 @@ const UserNavbar = () => {
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-            <li
-              class="nav-item "
-              style={{ listStyleType: "none", color: "black" }}
-            >
+            <li class="nav-item " style={{ listStyle: "none", color: "black" }}>
               <button className="nav-link btn btn-link">
-                <Link to={"/Property"}>
+                <Link
+                  to={"/Property"}
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
                   <FaHome />
                   Home
                 </Link>
@@ -83,7 +84,8 @@ const UserNavbar = () => {
             </li>
             <li className="nav-item mr-3">
               <button
-                className="btn btn-primary"
+                className="nav-link btn btn-link"
+                style={{ color: "blue" }}
                 onClick={() => openModal("requestCall")}
               >
                 <FaPhoneAlt />
@@ -91,7 +93,12 @@ const UserNavbar = () => {
               </button>
             </li>
             <li className="nav-item  ">
-              <button className="btn btn-danger" onClick={handlelogout}>
+              <button
+                className="nav-link btn btn-link "
+                style={{ color: "red" }}
+                onClick={handlelogout}
+              >
+                <LuLogOut />
                 LogOut
               </button>
             </li>
