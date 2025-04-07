@@ -13,6 +13,7 @@ import axios from "axios";
 import Footer from "./Footer";
 import { useMediaQuery } from "react-responsive";
 import Testimonial from "../Testimonial";
+import Loader from "./Loader";
 function Property() {
   const [location, setLocation] = useState("any");
   const [data, setData] = useState([]);
@@ -27,7 +28,7 @@ function Property() {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:8000/api/Property/getProperty"
+        "https://realestate-back-x6dl.onrender.com/api/Property/getProperty"
       );
       if (response.data.data) {
         setData(response.data.data);
@@ -68,7 +69,7 @@ function Property() {
     console.log(username, email, contact, message);
     // Post inquiry data to your backend
     const res = await axios.post(
-      "http://localhost:8000/api/Admin/AddInquiry",
+      "https://realestate-back-x6dl.onrender.com/api/Admin/AddInquiry",
       {
         username,
         email,
@@ -85,7 +86,13 @@ function Property() {
       setMessage(" ");
     }
   };
-
+  if (data.length === 0) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
   return (
     <>
       <UserNavbar />
@@ -145,11 +152,17 @@ function Property() {
         <div className="row">
           {data.map((e) => {
             const images = e.Image
-              ? e.Image.split(",").map(
-                  (fileName) => `http://localhost:8000/uploads/${fileName}`
-                )
+              ? e.Image.split(",").map((fileName) => {
+                  //void adding 'http://localhost:8000/uploads/' again if it's already included
+                  const imageUrl = `https://realestate-back-x6dl.onrender.com/uploads/${fileName}`;
+                  return imageUrl.includes(
+                    "https://realestate-back-x6dl.onrender.com/uploads/"
+                  )
+                    ? imageUrl
+                    : `https://realestate-back-x6dl.onrender.com/uploads/${fileName}`;
+                })
               : [];
-            console.log(images);
+            console.log(images[1]);
             return (
               <div
                 className="card BuyreCart"

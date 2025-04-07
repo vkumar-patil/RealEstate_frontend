@@ -62,7 +62,7 @@ function Admin() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/Admin/Addproduct",
+        "https://realestate-back-x6dl.onrender.com/api/Admin/Addproduct",
         formData,
         {
           headers: {

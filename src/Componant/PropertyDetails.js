@@ -14,7 +14,7 @@ import { GiHomeGarage } from "react-icons/gi";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import Loader from "./Loader";
 function PropertyDetails() {
   const { id } = useParams();
   const [detail, setDetail] = useState([]);
@@ -28,7 +28,7 @@ function PropertyDetails() {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:8000/api/Property/getProperty"
+        "https://realestate-back-x6dl.onrender.com/api/Property/getProperty"
       );
       if (response.data.data) {
         setData(response.data.data);
@@ -44,7 +44,7 @@ function PropertyDetails() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/Property/${id}`
+          `https://realestate-back-x6dl.onrender.com/api/Property/${id}`
         );
         const data = response.data.data;
         console.log(response.data.data);
@@ -66,7 +66,11 @@ function PropertyDetails() {
   }, [id]);
 
   if (detail.length === 0) {
-    return <div>No property details available.</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   const handleSubmit = async () => {
@@ -75,7 +79,7 @@ function PropertyDetails() {
     console.log(username, email, contact, message);
     // Post inquiry data to your backend
     const res = await axios.post(
-      "http://localhost:8000/api/Admin/AddInquiry",
+      "https://realestate-back-x6dl.onrender.com/api/Admin/AddInquiry",
       {
         username,
         email,
@@ -104,7 +108,7 @@ function PropertyDetails() {
     try {
       // Fetch user details using the token
       const userResponse = await axios.get(
-        "http://localhost:8000/api/user/userdetails",
+        "https://realestate-back-x6dl.onrender.com/api/user/userdetails",
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -121,7 +125,7 @@ function PropertyDetails() {
       };
 
       await axios.post(
-        `http://localhost:8000/api/Property/addInterestedUser/${id}`,
+        `https://realestate-back-x6dl.onrender.com/api/Property/addInterestedUser/${id}`,
         interestedData,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -171,11 +175,13 @@ function PropertyDetails() {
           // Process images to avoid duplicates
           const images = e.Image
             ? e.Image.split(",").map((fileName) => {
-                // Avoid adding 'http://localhost:8000/uploads/' again if it's already included
-                const imageUrl = `http://localhost:8000/uploads/${fileName}`;
-                return imageUrl.includes("http://localhost:8000/uploads/")
+                //void adding 'http://localhost:8000/uploads/' again if it's already included
+                const imageUrl = `https://realestate-back-x6dl.onrender.com/uploads/${fileName}`;
+                return imageUrl.includes(
+                  "https://realestate-back-x6dl.onrender.com/uploads/"
+                )
                   ? imageUrl
-                  : `http://localhost:8000/uploads/${fileName}`;
+                  : `https://realestate-back-x6dl.onrender.com/uploads/${fileName}`;
               })
             : [];
           console.log("Processed images for property", index + 1, ":", images);
@@ -446,7 +452,8 @@ function PropertyDetails() {
             {data.map((e) => {
               const images = e.Image
                 ? e.Image.split(",").map(
-                    (fileName) => `http://localhost:8000/uploads/${fileName}`
+                    (fileName) =>
+                      `https://realestate-back-x6dl.onrender.com/uploads/${fileName}`
                   )
                 : [];
 

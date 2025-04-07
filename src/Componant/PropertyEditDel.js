@@ -25,7 +25,7 @@ function EditProperty() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/Property/${id}`
+          `https://realestate-back-x6dl.onrender.com/api/Property/${id}`
         );
         const data = response.data.data;
         if (Array.isArray(data)) {
@@ -62,7 +62,7 @@ function EditProperty() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/Property/updateProperty/${id}`,
+        `https://realestate-back-x6dl.onrender.com/api/Property/updateProperty/${id}`,
         formData
       );
       console.log("Property updated successfully:", response.data);

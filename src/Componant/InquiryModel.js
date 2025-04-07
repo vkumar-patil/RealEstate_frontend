@@ -10,7 +10,7 @@ function InquiryModal({ onClose }) {
     const fetchInquiries = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/Admin/getInquiry"
+          "https://realestate-back-x6dl.onrender.com/api/Admin/getInquiry"
         );
         setInquiries(response.data.data || []);
         setLoading(false);

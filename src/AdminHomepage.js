@@ -19,7 +19,7 @@ function AdminHomepage() {
 
     try {
       const response = await axios.delete(
-        `http://localhost:8000/api/Property/deleteProperty/${id}`
+        `https://realestate-back-x6dl.onrender.com/api/Property/deleteProperty/${id}`
       );
 
       if (response.status === 200) {
@@ -36,7 +36,7 @@ function AdminHomepage() {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
-        "http://localhost:8000/api/Property/getProperty"
+        "https://realestate-back-x6dl.onrender.com/api/Property/getProperty"
       );
       if (response.data.data) {
         setData(response.data.data);
@@ -64,7 +64,7 @@ function AdminHomepage() {
           {data.map((e) => {
             const image = e.Image
               ? e.Image.split(",").map(
-                  (fileName) => `http://localhost:8000/uploads/${fileName}`
+                  (fileName) => `https://realestate-back-x6dl.onrender.com/uploads/${fileName}`
                 )
               : [];
 
